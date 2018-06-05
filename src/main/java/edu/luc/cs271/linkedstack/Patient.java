@@ -20,6 +20,11 @@ public class Patient extends LevelIllness {
         setEmergencyrate();
     }
 
+    public Patient(String name, int age){
+        name = this.name;
+        age = this.age;
+    }
+
 /**Sets patient name*/
     private String inputName() {
         System.out.println("What is the patient's name?");

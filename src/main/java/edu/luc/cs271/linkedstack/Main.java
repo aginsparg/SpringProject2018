@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 
     /** Amount of time between servicing patients in milliseconds. Amount of time equivalent to 2 minutes between patients. */
-    static final int TIME_BETWEEN_PATIENTS = 60000;
+    static final int TIME_BETWEEN_PATIENTS = 45000;
 
 
 

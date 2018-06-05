@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 public class TestLinkedQueue {
 
@@ -24,21 +24,12 @@ public class TestLinkedQueue {
     fixture = null;
   }
 
+
   @Test
   public void testInitial() {
     assertTrue(fixture.isEmpty());
-    try {
-      fixture.poll();
-      fail("java.util.NoSuchElementException expected");
-    } catch (final NoSuchElementException ex) {
-      // exception occurred => all good
-    }
-    try {
-      fixture.peek();
-      fail("java.util.NoSuchElementException expected");
-    } catch (final NoSuchElementException ex) {
-      // exception occurred => all good
-    }
+assertNull(fixture.poll());
+assertNull(fixture.peek());
   }
 
   @Test
@@ -84,5 +75,21 @@ public class TestLinkedQueue {
     assertEquals(Arrays.asList(value1, value2), list);
     final List<String> list2 = fixture.asList();
     assertEquals(2, list2.size());
+  }
+
+  @Test
+    public void testPrioritize(){
+
+      final String value1 = "5 world";
+      final String value2 = "6 sing";
+      final String value3 = "4 hello";
+
+      fixture.offer(value1);
+      fixture.offer(value2);
+      fixture.offer(value3);
+
+      final List<String> list = fixture.asList();
+      assertEquals(Arrays.asList(value3, value1, value2), list);
+
   }
 }

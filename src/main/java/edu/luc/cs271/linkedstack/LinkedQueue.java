@@ -5,27 +5,26 @@ import java.util.*;
 public class LinkedQueue<E> implements MyQueue<E> {
 
     Node<E> first;
-    Node<E> last;
+    Node<E> last = null;
     int size = 0;
-    //hospitalqueue = new LinkedList<>();
+
 
     public boolean offer(final E object) {
 
-
         if (size == 0) {
             first = new Node<>(object, last);
-            last = first;
+            //last = first;
         } else
         {prioritize(object);}
 
-            size = size++;
+            size = size+1;
         return true;
     }
 
 
     public E peek() {
         if(isEmpty()){
-            throw new NoSuchElementException();
+            return null;
         }
 
         return first.data;
@@ -37,16 +36,13 @@ public class LinkedQueue<E> implements MyQueue<E> {
         else {
             E to_return = first.data;
             first = first.next;
-            size = size--;
+            size = size-1;
             return to_return;
         }
     }
 
     public boolean isEmpty() {
-        if (first == null)
-            return true;
-        else
-            return false;
+        return size == 0;
     }
 
     public int size() {
@@ -54,7 +50,7 @@ public class LinkedQueue<E> implements MyQueue<E> {
         return size;
     }
 
-    public List asList() {
+    public List<E> asList() {
 
         Node<E> tempfirst = first;
         List<E> hostpitallist = new ArrayList<>();
@@ -71,22 +67,28 @@ public class LinkedQueue<E> implements MyQueue<E> {
 
     public boolean prioritize(E obj) {
 
-        Node<E> before = first;
-        E testing = first.data;
+        Node<E> nodetesting;
+        nodetesting = first;
+        E testing = nodetesting.data;
+        Node<E> nodeInsertAfter = first;
         boolean done = false;
-        while (before != null || done == false) {
-            if (Integer.parseInt(testing.toString().substring(0, 2)) > Integer.parseInt(obj.toString().substring(0, 2))) {
-                testing = first.next.data;
+
+        if (nodetesting == null) {
+            nodeInsertAfter.next = new Node<>(obj, last);
+            done = true;
+        }
+        while (!done) {
+            if (Integer.parseInt(testing.toString().substring(0, 1)) > Integer.parseInt(obj.toString().substring(0, 1))) {
+                nodeInsertAfter = nodetesting;
+                nodetesting = nodetesting.next;
+                testing = nodetesting.data;
             } else {
-                Node<E> temp = before.next;
-                before.next = new Node<>(obj, temp);
+                nodeInsertAfter.next = new Node<>(obj, nodetesting);
                 done = true;
             }
         }
 
-        if (before == null) {
-            last.next = new Node<>(obj);
-        }
+
         return true;
     }
 }
