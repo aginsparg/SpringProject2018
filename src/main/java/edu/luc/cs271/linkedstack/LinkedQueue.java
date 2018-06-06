@@ -105,9 +105,10 @@ public class LinkedQueue<E> implements MyQueue<E> {
         Node<E> nodetesting;
         nodetesting = first;
         E testing = nodetesting.data;
-        Node<E> nodeInsertAfter = first;
+        Node<E> nodeInsertAfter = null;
         boolean done = false;
         int full_times_through_loop = 0;
+        boolean lessthannext = false;
 
         while (nodetesting.next!=null && !done) {
             if (Integer.parseInt(testing.toString().substring(0, 1)) < Integer.parseInt(obj.toString().substring(0, 1))) {
@@ -116,20 +117,55 @@ public class LinkedQueue<E> implements MyQueue<E> {
                 testing = nodetesting.data;
                 full_times_through_loop++;
             } else {
-                if(full_times_through_loop ==0)
+                if((full_times_through_loop ==0) && (Integer.parseInt(testing.toString().substring(0, 1)) != Integer.parseInt(obj.toString().substring(0, 1))))
                 {
                     Node<E> newfirst = new Node<>(obj, nodetesting);
                     first = newfirst;
                 }
                 else
-                nodeInsertAfter.next = new Node<>(obj, nodetesting);
+                    if((full_times_through_loop ==0) && (Integer.parseInt(nodetesting.next.data.toString().substring(0, 1)) > Integer.parseInt(obj.toString().substring(0, 1))))
+                    {
+                        nodetesting.next = new Node<>(obj, nodetesting.next);
+                    }
+                    else
+
+                        if(Integer.parseInt(testing.toString().substring(0, 1)) == Integer.parseInt(obj.toString().substring(0, 1))){
+                            nodeInsertAfter = nodetesting;
+                            nodetesting = nodetesting.next;
+                            testing = nodetesting.data;
+                            do {
+
+                                if(Integer.parseInt(testing.toString().substring(0,1)) == Integer.parseInt(obj.toString().substring(0,1))){
+                                    nodeInsertAfter = nodetesting;
+                                    nodetesting = nodetesting.next;
+                                    testing = nodetesting.data;
+
+                                }
+                                else
+                                {lessthannext = true;}
+                            }while(!lessthannext);
+                    nodeInsertAfter.next = new Node<>(obj, nodetesting);
+
+                    }
+                    else
+                    {nodeInsertAfter.next = new Node<>(obj, nodetesting);}
 
                 done = true;
             }
         }
 
         if (nodetesting.next == null) {
+            if ((Integer.parseInt(testing.toString().substring(0, 1)) > Integer.parseInt(obj.toString().substring(0, 1)) && (nodeInsertAfter == null))) {
+                Node<E>newfirst = new Node<>(obj, nodetesting);
+                first = newfirst;
+            }
+            else
+                if  ((Integer.parseInt(testing.toString().substring(0, 1)) > Integer.parseInt(obj.toString().substring(0, 1)) && (nodeInsertAfter != null))){
+                    nodeInsertAfter.next = new Node<>(obj, nodetesting);
+                }
+                else{
             nodetesting.next = new Node<>(obj, last);
+        }
         }
 
         return true;

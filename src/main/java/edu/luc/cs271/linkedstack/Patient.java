@@ -47,6 +47,7 @@ public class Patient extends LevelIllness {
     private int inputAge() {
         System.out.println("What is the patient's age?");
         int answer = keyboard.nextInt();
+
         if(answer == -1)
         {
             System.out.println("You are now exiting the program.");
