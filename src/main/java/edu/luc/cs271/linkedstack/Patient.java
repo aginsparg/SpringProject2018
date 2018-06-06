@@ -20,16 +20,18 @@ public class Patient extends LevelIllness {
         setEmergencyrate();
     }
 
-    public Patient(String name, int age){
-        name = this.name;
-        age = this.age;
-    }
 
 /**Sets patient name*/
     private String inputName() {
         System.out.println("What is the patient's name?");
+        String answer = keyboard.nextLine();
+        if(answer.equals("-1"))
+        {
+            System.out.println("You are now exiting the program.");
+            System.exit(0);
+        }
 
-        return keyboard.nextLine();
+        return answer;
     }
 /**
  * Returns patient name. If patient name was not yet set, calls inputName() and sets and then returns name.
@@ -44,8 +46,14 @@ public class Patient extends LevelIllness {
     /**Sets patient age*/
     private int inputAge() {
         System.out.println("What is the patient's age?");
+        int answer = keyboard.nextInt();
+        if(answer == -1)
+        {
+            System.out.println("You are now exiting the program.");
+            System.exit(0);
+        }
 
-        return keyboard.nextInt();
+        return answer;
     }
 
     /**
@@ -67,6 +75,7 @@ public class Patient extends LevelIllness {
         condition = emergency.substring(2);
     }
 
+    /** Returns String representation of emergency rate and condition of patient */
     public String toString(){
 
         return emergencyrate + " " + condition;

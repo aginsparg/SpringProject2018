@@ -73,8 +73,8 @@ assertNull(fixture.peek());
     final List<String> list = fixture.asList();
     assertEquals(2, list.size());
     assertEquals(Arrays.asList(value1, value2), list);
-    final List<String> list2 = fixture.asList();
-    assertEquals(2, list2.size());
+   final List<String> list2 = fixture.asList();
+   assertEquals(2, list2.size());
   }
 
   @Test
